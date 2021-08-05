@@ -4,7 +4,9 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.pokemonsinfo.ParseResult
 import com.example.pokemonsinfo.network.PokemonApi
+import com.example.pokemonsinfo.pokemon.Pokemon
 import kotlinx.coroutines.launch
 
 class PokemonsViewModel(application: Application) : AndroidViewModel(application) {
@@ -16,7 +18,14 @@ class PokemonsViewModel(application: Application) : AndroidViewModel(application
         viewModelScope.launch {
             try {
                 val listResult = PokemonApi.RETROFIT_SERVICE.getProperties()
-                Log.d("listResult", "$listResult")
+                val parseResult = ParseResult()
+
+                val listPokemons = mutableListOf<Pokemon>()
+
+                for (i in listResult.results.indices) {
+                    listPokemons.add(parseResult.parsePokemon(listResult.results[i].toString()))
+                }
+
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.d("errorResult", e.toString())

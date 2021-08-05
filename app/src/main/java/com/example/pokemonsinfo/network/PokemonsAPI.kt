@@ -1,6 +1,6 @@
 package com.example.pokemonsinfo.network
 
-import com.example.pokemonsinfo.pokemon.Pokemon
+import com.example.pokemonsinfo.pokemon.Result
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -20,7 +20,7 @@ private val retrofit = Retrofit.Builder()
 
 interface PokemonApiService {
     @GET("pokemon/")
-    suspend fun getProperties(): Pokemon
+    suspend fun getProperties(): Result
 }
 
 object PokemonApi {
