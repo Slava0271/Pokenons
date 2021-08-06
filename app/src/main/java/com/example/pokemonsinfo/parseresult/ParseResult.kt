@@ -1,6 +1,6 @@
 package com.example.pokemonsinfo.parseresult
 
-import com.example.pokemonsinfo.pokemon.Pokemon
+import com.example.pokemonsinfo.database.pokemon.Pokemon
 
 class ParseResult {
     private fun parseListItem(item: String): List<String> {
@@ -12,6 +12,7 @@ class ParseResult {
         val name = parsedItem.first().split("=").last()
         var url = parsedItem.last().split("=").last()
         url = url.substring(0, url.length - 1)
-        return Pokemon(name, url)
+        val pokemon = Pokemon(name = name,url =url)
+        return Pokemon(name = name, url = url )
     }
 }
